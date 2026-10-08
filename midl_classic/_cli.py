@@ -483,10 +483,15 @@ def main() -> None:
         action="store_true",
         help="Show detailed information (enum values, struct fields, etc.)",
     )
+    parser.add_argument(
+        "--encoding", "-e",
+        default="utf-8-sig",
+        help="Encoding to use when reading the file (default: utf-8-sig)"
+    )
     args = parser.parse_args()
 
     try:
-        midl = parse_file(args.file)
+        midl = parse_file(args.file, args.encoding)
     except FileNotFoundError:
         print(f"Error: File not found: {args.file}", file=sys.stderr)
         sys.exit(1)

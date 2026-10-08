@@ -103,9 +103,6 @@ class Lexer:
             elif ch == '"':
                 self._advance()
                 return Token(TokenType.STRING, "".join(chars), start_line, start_col)
-            elif ch == "\n":
-                # String can't span lines in MIDL
-                break
             else:
                 chars.append(self._advance())
         raise self._error("Unterminated string literal")

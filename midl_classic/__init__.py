@@ -68,11 +68,12 @@ def parse_string(source: str, filename: str = "<string>") -> MidlFile:
     return parser.parse()
 
 
-def parse_file(path: str) -> MidlFile:
+def parse_file(path: str, encoding: str | None = None) -> MidlFile:
     """Parse an IDL file from disk.
 
     Args:
         path: Path to the .idl file.
+        encoding: File encoding to use.
 
     Returns:
         A MidlFile containing all parsed elements.
@@ -82,7 +83,7 @@ def parse_file(path: str) -> MidlFile:
         LexError: If the file contains invalid tokens.
         FileNotFoundError: If the file does not exist.
     """
-    with open(path, "r", encoding="utf-8-sig") as f:
+    with open(path, "r", encoding=encoding) as f:
         source = f.read()
     return parse_string(source, filename=path)
 
